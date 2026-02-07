@@ -1,0 +1,72 @@
+﻿namespace ConsoleAppC_
+{
+    using System;
+    public class Program
+    {
+        public static void Main()
+        {
+            Proga1();
+            Proga2();
+        }
+        private static void Proga1()
+        {
+            int year = InputNum("Введите год: ");
+            if (IsLeapYear(year))
+                Console.WriteLine("Год {0} високосный", year);
+            else
+                Console.WriteLine("Год {0} не високосный", year);
+        }
+        private static int InputNum(string message)
+        {
+            string input;
+            int num;
+            do
+            {
+                Console.Write(message);
+                input = Console.ReadLine();
+                if (!(int.TryParse(input, out num)))
+                    Console.WriteLine("Введены неверные данные");
+            }
+            while (!(int.TryParse(input, out num)));
+            return num;
+        }
+        private static bool IsLeapYear(int year)
+        {
+            return (year > 0 & year % 4 == 0);
+        }
+        private static void Proga2()
+        {
+            char DegreeClass = CelcyOrFarengate("Введите значение шкалы: ");
+            int Degree = InputNum("Введите температуру: ");
+            Console.WriteLine("Результат: {0}", DegreeCompilator(DegreeClass, Degree));
+
+        }
+        private static char CelcyOrFarengate(string message)
+        {
+            string DegreeClass;
+            char DegreeClassChar;
+            string DegreeClassLow;
+            do
+            {
+                Console.Write(message);
+                DegreeClass = Console.ReadLine();
+                DegreeClassLow = DegreeClass.ToLower();
+                if ((char.TryParse(DegreeClass, out DegreeClassChar)) && (DegreeClassLow == "c" || DegreeClassLow == "f"))
+                    break;
+                else
+                    Console.WriteLine("Введена неверная информация");
+
+            }
+            while (!(DegreeClassLow == "c" || DegreeClassLow == "f"));
+            return DegreeClassChar;
+        }
+        private static int DegreeCompilator(char DegreeClass, int Degree)
+        {
+            if (DegreeClass == 'c')
+                return (Degree * 9) / 5 + 32;
+            else
+                return (Degree - 32) * 5 / 9;
+        }
+
+    }
+}

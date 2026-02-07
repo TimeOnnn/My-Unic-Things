@@ -1,0 +1,57 @@
+﻿using System;
+
+namespace Study.Labs.Lab01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Proga1();
+        }
+        private static void Proga1()
+        {
+            string MaxWordLenght = WordLenght("Вводите слова, завершите exit");
+            Console.WriteLine("Cамое длинное слово: {0}", MaxWordLenght.ToUpper());
+        }
+        private static string WordLenght(string message)
+        {
+            string word;
+            int MaxLenght = 0;
+            string MaxLenghtWord = "";
+            Console.WriteLine(message);
+            do
+            {
+                word = Console.ReadLine();
+                if (word.Length > MaxLenght)
+                {
+                    MaxLenght = word.Length;
+                    MaxLenghtWord = word + ' ' + '(' + MaxLenght.ToString() + ')';
+                }
+            }
+            while (!(word.ToLower() == "exit"));
+            return MaxLenghtWord;
+        }
+        private static void Proga2()
+        {
+            int GoodPercent = Game("Попробуй угадать!");
+        }
+        private static int Game(string message)
+        {
+            int schet= 0, wins = 0;
+            int answer;
+            do
+            {
+                string StrAnswer = Console.ReadLine();
+                if (!(int.TryParse(StrAnswer, out answer)))
+                    Console.WriteLine("Введены неверные данные");
+                int PCanswer = new Random().Next(2);
+                if (answer == PCanswer)
+                    wins += 1;
+                schet += 1;
+            }
+            while (answer > 1);
+            return 
+        }
+    
+    }
+}

@@ -1,0 +1,14 @@
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.AssemblyInfoInputs.cache
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.AssemblyInfo.cs
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.csproj.CoreCompileInputs.cache
+C:\Users\study\Downloads\Study.Labs.Lab01\bin\Debug\net8.0\Study.Labs.Lab01.exe
+C:\Users\study\Downloads\Study.Labs.Lab01\bin\Debug\net8.0\Study.Labs.Lab01.deps.json
+C:\Users\study\Downloads\Study.Labs.Lab01\bin\Debug\net8.0\Study.Labs.Lab01.runtimeconfig.json
+C:\Users\study\Downloads\Study.Labs.Lab01\bin\Debug\net8.0\Study.Labs.Lab01.dll
+C:\Users\study\Downloads\Study.Labs.Lab01\bin\Debug\net8.0\Study.Labs.Lab01.pdb
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.dll
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\refint\Study.Labs.Lab01.dll
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.pdb
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\Study.Labs.Lab01.genruntimeconfig.cache
+C:\Users\study\Downloads\Study.Labs.Lab01\obj\Debug\net8.0\ref\Study.Labs.Lab01.dll
