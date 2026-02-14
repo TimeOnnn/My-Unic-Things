@@ -1,56 +1,71 @@
-using System;
-
-namespace Study.Labs.Lab01
+﻿namespace ConsoleAppC_
 {
-    internal class Program
+    using System;
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             Proga1();
+            Proga2();
         }
         private static void Proga1()
         {
-            string MaxWordLenght = WordLenght("Вводите слова, завершите exit");
-            Console.WriteLine("Cамое длинное слово: {0}", MaxWordLenght.ToUpper());
+            int year = InputNum("Введите год: ");
+            if (IsLeapYear(year))
+                Console.WriteLine("Год {0} високосный", year);
+            else
+                Console.WriteLine("Год {0} не високосный", year);
         }
-        private static string WordLenght(string message)
+        private static int InputNum(string message)
         {
-            string word;
-            int MaxLenght = 0;
-            string MaxLenghtWord = "";
-            Console.WriteLine(message);
+            string input;
+            int num;
             do
             {
-                word = Console.ReadLine();
-                if (word.Length > MaxLenght)
-                {
-                    MaxLenght = word.Length;
-                    MaxLenghtWord = word + ' ' + '(' + MaxLenght.ToString() + ')';
-                }
+                Console.Write(message);
+                input = Console.ReadLine();
+                if (!(int.TryParse(input, out num)))
+                    Console.WriteLine("Введены неверные данные");
             }
-            while (!(word.ToLower() == "exit"));
-            return MaxLenghtWord;
+            while (!(int.TryParse(input, out num)));
+            return num;
+        }
+        private static bool IsLeapYear(int year)
+        {
+            return (year > 0 & year % 4 == 0);
         }
         private static void Proga2()
         {
-            int GoodPercent = Game("Попробуй угадать!");
+            char DegreeClass = CelcyOrFarengate("Введите значение шкалы: ");
+            int Degree = InputNum("Введите температуру: ");
+            Console.WriteLine("Результат: {0}", DegreeCompilator(DegreeClass, Degree));
+
         }
-        private static int Game(string message)
+        private static char CelcyOrFarengate(string message)
         {
-            int schet = 0, wins = 0;
-            int answer;
+            string DegreeClass;
+            char DegreeClassChar;
+            string DegreeClassLow;
             do
             {
-                string StrAnswer = Console.ReadLine();
-                if (!(int.TryParse(StrAnswer, out answer)))
-                    Console.WriteLine("Введены неверные данные");
-                int PCanswer = new Random().Next(2);
-                if (answer == PCanswer)
-                    wins += 1;
-                schet += 1;
+                Console.Write(message);
+                DegreeClass = Console.ReadLine();
+                DegreeClassLow = DegreeClass.ToLower();
+                if ((char.TryParse(DegreeClass, out DegreeClassChar)) && (DegreeClassLow == "c" || DegreeClassLow == "f"))
+                    break;
+                else
+                    Console.WriteLine("Введена неверная информация");
+
             }
-            while (answer > 1);
-            return
+            while (!(DegreeClassLow == "c" || DegreeClassLow == "f"));
+            return DegreeClassChar;
+        }
+        private static int DegreeCompilator(char DegreeClass, int Degree)
+        {
+            if (DegreeClass == 'c')
+                return (Degree * 9) / 5 + 32;
+            else
+                return (Degree - 32) * 5 / 9;
         }
 
     }
