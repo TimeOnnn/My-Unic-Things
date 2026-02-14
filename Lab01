@@ -11,49 +11,53 @@ namespace Study.Labs.Lab01
         }
         private static void Proga1()
         {
-            string MaxWordLenght = WordLenght("Вводите слова, завершите exit");
-            Console.WriteLine("Cамое длинное слово: {0}", MaxWordLenght.ToUpper());
+            string maxWordLenght = WordLength("Вводите слова, завершите exit");
+            if (maxWordLenght == "");
+            else
+                Console.WriteLine("Cамое длинное слово: {0}", maxWordLenght.ToUpper());
         }
-        private static string WordLenght(string message)
+        private static string WordLength(string message)
         {
             string word;
-            int MaxLenght = 0;
-            string MaxLenghtWord = "";
+            int maxLenght = 0;
+            string maxLenghtWord = "";
             Console.WriteLine(message);
             do
             {
                 word = Console.ReadLine();
-                if (word.Length > MaxLenght)
+                if (word.ToLower() == "exit")
+                    break;
+                if (word.Length > maxLenght)
                 {
-                    MaxLenght = word.Length;
-                    MaxLenghtWord = word + ' ' + '(' + MaxLenght.ToString() + ')';
+                    maxLenght = word.Length;
+                    maxLenghtWord = word + ' ' + '(' + maxLenght.ToString() + ')';
                 }
             }
-            while (!(word.ToLower() == "exit"));
-            return MaxLenghtWord;
+            while (true);
+            return maxLenghtWord;
         }
         private static void Proga2()
         {
-            string GameOver = Game("Попробуй угадать!");
-            Console.WriteLine(GameOver);
+            string gameOver = Game("Попробуй угадать!");
+            Console.WriteLine(gameOver);
         }
         private static string Game(string message)
         {
-            double schet = 0, wins = 0;
+            double score = 0, wins = 0;
             int answer;
             Random random = new Random();
             Console.WriteLine(message);
             do
             {
                 Console.Write("Введите число: ");
-                string StrAnswer = Console.ReadLine();
-                if (!(int.TryParse(StrAnswer, out answer)))
+                string strAnswer = Console.ReadLine();
+                if (!(int.TryParse(strAnswer, out answer)))
                 {
                     Console.WriteLine("Введены неверные данные");
                     break;
                 }
-                int PCanswer = new Random().Next(2);
-                if (answer == PCanswer)
+                int pcAnswer = new Random().Next(2);
+                if (answer == pcAnswer)
                 {
                     wins += 1;
                     Console.WriteLine("Угадали!");
@@ -61,13 +65,16 @@ namespace Study.Labs.Lab01
                 else
                     Console.WriteLine("Попробуйте снова...");
                 if (answer == 0.0 || answer == 1.0)
-                    schet += 1;
+                    score += 1;
             }
             while (!(answer > 1));
-            double percent = (wins / schet * 100);
+            return GameScoreCount(wins, score);
+        }
+        private static string GameScoreCount(double wins, double score)
+        {
+            double percent = (wins / score * 100);
             string result = ("Игра окончена со счётом " + wins + ", угадано " + Math.Round(percent, 1) + "% бросков.");
             return result;
         }
-
     }
 }
