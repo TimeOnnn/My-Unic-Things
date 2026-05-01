@@ -53,10 +53,15 @@ namespace Study.Labs.Lab03
                 new Product { Name = "Сервант", Category = "Кухонная утварь", Ingredients = "Чашки, блюдца, чайные ложки", ShelfLife = "нет" }
             };
 
+            FindingProduct(products);
 
-        
+            Employee[] employee = new Employee[]
+            { 
+                new Employee { LastName = ""}
+            };
+
         }
-        static void NumberInput(Train[] trains )
+        static void NumberInput(Train[] trains)
         {
             Console.WriteLine("Введите номер поезда");
             int inputNumber = int.Parse(Console.ReadLine());
@@ -75,12 +80,13 @@ namespace Study.Labs.Lab03
             }
             if (foundedTrain != null)
                 foundedTrain.PrintTrainInfo();
-        
+
         }
+        
         static void NumberOfBiggestTrain(Train[] trains)
         {
             int biggestTrain = -2000;
-            
+
             foreach (Train x in trains)
             {
                 if (x.NumberOfSeats >= biggestTrain)
@@ -89,8 +95,22 @@ namespace Study.Labs.Lab03
 
             Console.WriteLine($"Поезд с наибольшим количеством посадочных мест под номером {biggestTrain}");
         }
+
+        static void FindingProduct(Product[] products)
+        {
+            Console.WriteLine("Введите ингридиент");
+            string ingridient = Console.ReadLine();
+
+            string lowerIngridient;
+            foreach (Product x in products)
+            {
+                lowerIngridient = x.Ingredients.ToLower();
+                if (lowerIngridient.Contains(ingridient) || x.Ingredients.Contains(ingridient))
+                    x.PrintProductInfo();
+            }
+        }
     }
-    
+
     class Product
     {
         public string Name { get; set; }
@@ -107,6 +127,16 @@ namespace Study.Labs.Lab03
             Console.Write($"Срок годности: {ShelfLife}\n");
             Console.WriteLine("----------------------------------------------------------------------------");
         }
+    }
+
+    class Employee
+    {
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string Address { get; set; }
+        public int HireYear { get; set; }
+        public string Post { get; set; 
     }
     
 
