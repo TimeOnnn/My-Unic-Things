@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-using System.Xml.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Study.Labs.Lab03
@@ -41,9 +39,9 @@ namespace Study.Labs.Lab03
 
             Product[] products = new Product[]
             {
-                new Product { Name = "Молоко", Category = "Молочная продукция", Ingredients = "Вода, лактоза, кальций", ShelfLife = "14 дней"},
-                new Product { Name = "Йогурт", Category = "Молочная продукция", Ingredients = "Вода, лактоза, кальций, время", ShelfLife = "30 дней"},
-                new Product { Name = "Масло", Category = "Молочная продукция", Ingredients = "Молоко, тряска", ShelfLife = "180 дней"},
+                new Product { Name = "Молоко", Category = "Молочка", Ingredients = "Вода, лактоза, кальций", ShelfLife = "14 дней"},
+                new Product { Name = "Йогурт", Category = "Молочка", Ingredients = "Вода, лактоза, кальций, время", ShelfLife = "30 дней"},
+                new Product { Name = "Масло", Category = "Молочка", Ingredients = "Молоко, тряска", ShelfLife = "180 дней"},
                 new Product { Name = "Беляш", Category = "Выпечка", Ingredients = "Тесто, курятина", ShelfLife = "5 дней"},
                 new Product { Name = "Чебурек", Category = "Выпечка", Ingredients = "Тесто, свинина", ShelfLife = "5 дней"},
                 new Product { Name = "Эчпочмак", Category = "Выпечка", Ingredients = "Тесто, баранина", ShelfLife = "5 дней"},
@@ -54,14 +52,27 @@ namespace Study.Labs.Lab03
             };
 
             FindingProduct(products);
+            PrintCategoryCount(products);
 
-            Employee[] employee = new Employee[]
-            { 
-                new Employee { LastName = ""}
+            Employee[] emloyees = new Employee[]
+            {
+                new Employee { LastName = "Капченко", FirstName = "Пётр", MiddleName = "Анапович", Address = "ул. Робиновича", HireYear = 2012, Post = "Директор завода"},
+                new Employee { LastName = "Курчанов", FirstName = "Михаил", MiddleName = "Олегович", Address = "ул. Пушкина", HireYear = 2017, Post = "Заместитель директора"},
+                new Employee { LastName = "Карамов", FirstName = "Иван", MiddleName = "Михаилович", Address = "ул. Каринова", HireYear = 2025, Post = "Оператор станка"},
+                new Employee { LastName = "Албани", FirstName = "Олег", MiddleName = "Павлович", Address = "ул. Ленина", HireYear = 2023, Post = "Оператор станка"},
+                new Employee { LastName = "Вочен", FirstName = "Андрей", MiddleName = "Алексеевич", Address = "ул. Ленина", HireYear = 2019, Post = "Оператор станка"},
+                new Employee { LastName = "Карягин", FirstName = "Алексей", MiddleName = "Андреевич", Address = "ул. Каринова", HireYear = 2022, Post = "Оператор станка"},
+                new Employee { LastName = "Лебедев", FirstName = "Михаил", MiddleName = "Сергеевич", Address = "", HireYear = 2023, Post = "Оператор станка"},
+                new Employee { LastName = "Воронина", FirstName = "Эльвира", MiddleName = "Мусамбитова", Address = "ул. Робиновича", HireYear = 2018, Post = "Секретарь"},
+                new Employee { LastName = "Кирис", FirstName = "Анна", MiddleName = "Ирэнова", Address = "ул. Сталина", HireYear = 2016, Post = "Бухгалтер"},
+                new Employee { LastName = "Русинова", FirstName = "Лиана", MiddleName = "Хазбековна", Address = "ул. Мира", HireYear = 2026, Post = "Бухгалтер"},
             };
 
+            HighestExperiance(emloyees);
+            FindingEmployeePost(emloyees);
+
         }
-        static void NumberInput(Train[] trains)
+        static void NumberInput(Train[] trains )
         {
             Console.WriteLine("Введите номер поезда");
             int inputNumber = int.Parse(Console.ReadLine());
@@ -80,20 +91,23 @@ namespace Study.Labs.Lab03
             }
             if (foundedTrain != null)
                 foundedTrain.PrintTrainInfo();
-
-        }
         
+        }
         static void NumberOfBiggestTrain(Train[] trains)
         {
-            int biggestTrain = -2000;
-
+            int biggestTrain = -2000, biggestTrainNumber = 0;
+            
             foreach (Train x in trains)
             {
                 if (x.NumberOfSeats >= biggestTrain)
+                {
                     biggestTrain = x.NumberOfSeats;
+                    biggestTrainNumber = x.Number;
+                }
             }
 
-            Console.WriteLine($"Поезд с наибольшим количеством посадочных мест под номером {biggestTrain}");
+            Console.WriteLine($"Поезд с наибольшим количеством посадочных мест под номером {biggestTrainNumber}");
+            Console.WriteLine("----------------------------------------------------------------------------");
         }
 
         static void FindingProduct(Product[] products)
@@ -109,8 +123,57 @@ namespace Study.Labs.Lab03
                     x.PrintProductInfo();
             }
         }
-    }
 
+        static void PrintCategoryCount(Product[] products)
+        {
+            int milk = 0, bread = 0, spice = 0, kitchen = 0;
+
+            foreach (Product x in products)
+            {
+                if (x.Category == "Молочка")
+                    milk++;
+                else if (x.Category == "Выпечка")
+                    bread++;
+                else if (x.Category == "Специи")
+                    spice++;
+                else if (x.Category == "Кухонная утварь")
+                    kitchen++;
+            }
+            Console.Write($"Количество продукции:\nМолочка: {milk},\nВыпечка: {bread},\nСпеции: {spice},\nКухонная утварь: {kitchen}\n");
+            Console.WriteLine("----------------------------------------------------------------------------");
+        }
+
+        static void HighestExperiance(Employee[] employees)
+        { 
+            Employee employee = null;
+            int max = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                if (2026 - employees[i].HireYear > max)
+                {
+                    max = 2026 - employees[i].HireYear;
+                    employee = employees[i];
+                }
+            }
+            Console.WriteLine("Наибольший стаж:\n");
+            employee.PrintEmployeeInfo();
+        }
+
+        static void FindingEmployeePost(Employee[] employees)
+        {
+            Console.WriteLine("Введите должность");
+            string inputPost = Console.ReadLine();
+
+            string lowerPost;
+            foreach (Employee x in employees)
+            {
+                lowerPost = x.Post.ToLower();
+                if (lowerPost.Contains(inputPost) || x.Post.Contains(inputPost))
+                    x.PrintEmployeeInfo();
+            }
+        }
+    }
+    
     class Product
     {
         public string Name { get; set; }
@@ -136,10 +199,20 @@ namespace Study.Labs.Lab03
         public string MiddleName { get; set; }
         public string Address { get; set; }
         public int HireYear { get; set; }
-        public string Post { get; set; 
-    }
-    
+        public string Post { get; set; }
 
+        public void PrintEmployeeInfo()
+        {
+            Console.WriteLine("----------------------------------------------------------------------------");
+            Console.Write($"Раборник: {LastName} {FirstName} {MiddleName},\t");
+            Console.Write($"Адресс: {Address},\t");
+            Console.Write($"Год найма: {HireYear},\t");
+            Console.Write($"Должность: {Post},\n");
+            Console.WriteLine("----------------------------------------------------------------------------");
+        }
+    }
+
+    
 
 
 }
