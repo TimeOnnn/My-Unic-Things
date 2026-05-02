@@ -51,7 +51,13 @@ namespace Study.Labs.Lab03
                 new Product { Name = "Сервант", Category = "Кухонная утварь", Ingredients = "Чашки, блюдца, чайные ложки", ShelfLife = "нет" }
             };
 
-            FindingProduct(products);
+            Console.WriteLine("Введите ингридиент");
+            string ingridient = Console.ReadLine();
+
+            var foundProducts = FindingProduct(products, ingridient);
+            foreach (Product x in foundProducts)
+                x.PrintProductInfo();
+            
             PrintCategoryCount(products);
 
             Employee[] emloyees = new Employee[]
@@ -72,7 +78,7 @@ namespace Study.Labs.Lab03
             FindingEmployeePost(emloyees);
 
         }
-        static void NumberInput(Train[] trains )
+        static void NumberInput(Train[] trains)
         {
             Console.WriteLine("Введите номер поезда");
             int inputNumber = int.Parse(Console.ReadLine());
@@ -91,12 +97,12 @@ namespace Study.Labs.Lab03
             }
             if (foundedTrain != null)
                 foundedTrain.PrintTrainInfo();
-        
+
         }
         static void NumberOfBiggestTrain(Train[] trains)
         {
             int biggestTrain = -2000, biggestTrainNumber = 0;
-            
+
             foreach (Train x in trains)
             {
                 if (x.NumberOfSeats >= biggestTrain)
@@ -110,18 +116,18 @@ namespace Study.Labs.Lab03
             Console.WriteLine("----------------------------------------------------------------------------");
         }
 
-        static void FindingProduct(Product[] products)
+         public static List<Product> FindingProduct(Product[] products, string ingredient)
         {
-            Console.WriteLine("Введите ингридиент");
-            string ingridient = Console.ReadLine();
 
             string lowerIngridient;
+            var list = new List<Product>();
             foreach (Product x in products)
             {
                 lowerIngridient = x.Ingredients.ToLower();
-                if (lowerIngridient.Contains(ingridient) || x.Ingredients.Contains(ingridient))
-                    x.PrintProductInfo();
+                if (lowerIngridient.Contains(ingredient) || x.Ingredients.Contains(ingredient))
+                    list.Add(x);
             }
+            return list;
         }
 
         static void PrintCategoryCount(Product[] products)
@@ -144,7 +150,7 @@ namespace Study.Labs.Lab03
         }
 
         static void HighestExperiance(Employee[] employees)
-        { 
+        {
             Employee employee = null;
             int max = 0;
             for (int i = 0; i < 10; i++)
@@ -173,7 +179,7 @@ namespace Study.Labs.Lab03
             }
         }
     }
-    
+
     class Product
     {
         public string Name { get; set; }
@@ -211,8 +217,4 @@ namespace Study.Labs.Lab03
             Console.WriteLine("----------------------------------------------------------------------------");
         }
     }
-
-    
-
-
 }
