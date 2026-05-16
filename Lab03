@@ -1,9 +1,5 @@
-using System.Net.Http.Headers;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Study.Labs.Lab03
 {
-
     class Train
     {
         public string DestinationPoint { get; set; }
@@ -24,27 +20,9 @@ namespace Study.Labs.Lab03
 
     class Program
     {
-        static void Main()
+        public static void Main()
         {
-            Train[] trains = new Train[]
-            {
-                new Train { DeparturePoint = "Москва", DestinationPoint = "Санкт-Петербург", Number = 1, NumberOfSeats = 500 },
-                new Train { DeparturePoint = "Калининград", DestinationPoint = "Владивосток", Number = 2, NumberOfSeats = 800 },
-                new Train { DeparturePoint = "Сургут", DestinationPoint = "Омск", Number = 3, NumberOfSeats = 400 },
-                new Train { DeparturePoint = "Сочи", DestinationPoint = "Севастополь", Number = 4, NumberOfSeats = 400 },
-                new Train { DeparturePoint = "Москва", DestinationPoint = "Казань", Number = 5, NumberOfSeats = 500 }
-            };
-
-            Console.WriteLine("Введите номер поезда");
-            int inputNumber = int.Parse(Console.ReadLine());
-            var foundTrain = NumberInput(trains, inputNumber);
-            foreach (Train x in foundTrain)
-                x.PrintTrainInfo();
-
-            var foundBiggestTrain = NumberOfBiggestTrain(trains);
-            Console.WriteLine("Поезд с наибольшим количеством мест: ");
-            foreach (Train x in foundBiggestTrain)
-                x.PrintTrainInfo();
+            TrainsDemo();
 
             Product[] products = new Product[]
             {
@@ -71,7 +49,7 @@ namespace Study.Labs.Lab03
             Employee[] emloyees = new Employee[]
             {
                 new Employee { LastName = "Капченко", FirstName = "Пётр", MiddleName = "Анапович", Address = "ул. Робиновича", HireYear = 2012, Post = "Директор завода"},
-                new Employee { LastName = "Курчанов", FirstName = "Михаил", MiddleName = "Олегович", Address = "ул. Пушкина", HireYear = 2017, Post = "Заместитель директора"},
+                new Employee { LastName = "Курчанов", FirstName = "Михаил", MiddleName = "Олегович", Address = "ул. Пушкина", HireYear = 2012, Post = "Заместитель директора"},
                 new Employee { LastName = "Карамов", FirstName = "Иван", MiddleName = "Михаилович", Address = "ул. Каринова", HireYear = 2025, Post = "Оператор станка"},
                 new Employee { LastName = "Албани", FirstName = "Олег", MiddleName = "Павлович", Address = "ул. Ленина", HireYear = 2023, Post = "Оператор станка"},
                 new Employee { LastName = "Вочен", FirstName = "Андрей", MiddleName = "Алексеевич", Address = "ул. Ленина", HireYear = 2019, Post = "Оператор станка"},
@@ -94,6 +72,30 @@ namespace Study.Labs.Lab03
                 x.PrintEmployeeInfo();
 
         }
+
+        private static void TrainsDemo()
+        {
+            Train[] trains = new Train[]
+{
+                new Train { DeparturePoint = "Москва", DestinationPoint = "Санкт-Петербург", Number = 1, NumberOfSeats = 500 },
+                new Train { DeparturePoint = "Калининград", DestinationPoint = "Владивосток", Number = 2, NumberOfSeats = 800 },
+                new Train { DeparturePoint = "Сургут", DestinationPoint = "Омск", Number = 3, NumberOfSeats = 400 },
+                new Train { DeparturePoint = "Сочи", DestinationPoint = "Севастополь", Number = 4, NumberOfSeats = 400 },
+                new Train { DeparturePoint = "Москва", DestinationPoint = "Казань", Number = 5, NumberOfSeats = 500 }
+};
+
+            Console.WriteLine("Введите номер поезда");
+            int inputNumber = int.Parse(Console.ReadLine());
+            var foundTrain = NumberInput(trains, inputNumber);
+            foreach (Train x in foundTrain)
+                x.PrintTrainInfo();
+
+            var foundBiggestTrain = NumberOfBiggestTrain(trains);
+            Console.WriteLine("Поезд с наибольшим количеством мест: ");
+            foreach (Train x in foundBiggestTrain)
+                x.PrintTrainInfo();
+        }
+
         public static List<Train> NumberInput(Train[] trains, int inputNumber)
         {
             var list = new List<Train>();
@@ -132,13 +134,10 @@ namespace Study.Labs.Lab03
 
         public static List<Product> FindingProduct(Product[] products, string ingredient)
         {
-
-            string lowerIngridient;
             var list = new List<Product>();
             foreach (Product x in products)
             {
-                lowerIngridient = x.Ingredients.ToLower();
-                if (lowerIngridient.Contains(ingredient) || x.Ingredients.Contains(ingredient))
+                if (x.Ingredients.Contains(ingredient, StringComparison.OrdinalIgnoreCase))
                     list.Add(x);
             }
             return list;
@@ -166,19 +165,15 @@ namespace Study.Labs.Lab03
         static List<Employee> HighestExperiance(Employee[] employees)
         {
             var list = new List<Employee>();
-            Employee employee = null;
-            int max = 0;
+            const int currentYear = 2026; //DateTime.Now.Year;
+            var minHireYear = employees.Min(o => o.HireYear); // TODO: почитать про методы расширения, делегаты, лямбда-выражения.
 
-            for (int i = 0; i < 10; i++)
+            foreach (Employee x in employees)
             {
-                if (2026 - employees[i].HireYear > max)
-                {
-                    max = 2026 - employees[i].HireYear;
-                    employee = employees[i];
-                }
+                if (x.HireYear == minHireYear)
+                    list.Add(x);
             }
-            
-            list.Add(employee);
+
             return list;
         }
 
