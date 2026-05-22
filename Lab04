@@ -1,0 +1,183 @@
+namespace Study.Labs.Lab04
+{
+        enum VehicleColor
+    {
+        Белый,
+        Чёрный,
+        Красный,
+        Голубой,
+        Серый
+    }
+
+    enum VehicleBodyType
+    {
+        Машина,
+        Автобус,
+        Грузовик
+    }
+    abstract class AVehicle
+    {
+        public VehicleColor Color { get; set; }
+        public VehicleBodyType BodyType { get; set; }
+        public int LicensePlateNumber { get; set; }
+        public bool HasPassenger { get; set; }
+        public virtual int GetSpeed()
+        {
+            return 0;
+        }
+    }
+
+    class Car : AVehicle
+    {
+        public Car()
+        {
+            BodyType = VehicleBodyType.Машина;
+        }
+
+        public override int GetSpeed()
+        {
+            Random random = new Random();
+            return random.Next(90, 151);
+        }
+    }
+
+    class Bus : AVehicle
+    {
+        public Bus()
+        {
+            BodyType = VehicleBodyType.Автобус;
+        }
+
+        public override int GetSpeed()
+        {
+            Random random = new Random();
+            return random.Next(80, 111);
+        }
+    }
+
+    class Truck : AVehicle
+    {
+        public Truck()
+        {
+            BodyType = VehicleBodyType.Грузовик;
+        }
+
+        public override int GetSpeed()
+        {
+            Random random = new Random();
+            return random.Next(70, 101);
+        }
+    }
+
+    class CheckPointStatistics
+    {
+        public int CarsCount { get; set; }
+        public int TrucksCount { get; set; }
+        public int BusesCount { get; set; }
+        public int SpeedLimitBreakersCount { get; set; }
+        public int CarJackersCount { get; set; }
+        public int AverageSpeed { get; set; }
+
+    }
+
+    class CheckPoint
+    {
+        CheckPointStatistics statistics = new CheckPointStatistics();
+        List<int> stolenCarNumbers = new List<int>()
+        {
+            1, 2, 3
+        };
+        private int allSpeed = 0;
+        private int allCars = 0;
+  
+        public void RegisterVehicle(AVehicle vehicle)
+        {
+            int speed = vehicle.GetSpeed();
+
+            Console.WriteLine("--------------------");
+            Console.WriteLine("Тип: " + vehicle.BodyType);
+            Console.WriteLine("Номер: " + vehicle.LicensePlateNumber);
+            Console.WriteLine("Цвет: " + vehicle.Color);
+
+            if (vehicle.HasPassenger)
+                Console.WriteLine("Есть пассажир");
+            else
+                Console.WriteLine("Нет пассажира");
+
+            Console.WriteLine("Скорость: " + speed);
+
+            if (speed > 110)
+            {
+                Console.WriteLine("Превышение скорости!");
+                statistics.SpeedLimitBreakersCount++;
+            }
+
+            if (stolenCarNumbers.Contains(vehicle.LicensePlateNumber))
+            {
+                Console.WriteLine("ПЕРЕХВАТ!");
+                statistics.CarJackersCount++;
+            }
+
+            if (vehicle.BodyType == VehicleBodyType.Машина)
+                statistics.CarsCount++;
+
+            if (vehicle.BodyType == VehicleBodyType.Автобус)
+                statistics.BusesCount++;
+
+            if (vehicle.BodyType == VehicleBodyType.Грузовик)
+                statistics.TrucksCount++;
+
+            allCars++;
+            allSpeed += speed;
+            statistics.AverageSpeed = allSpeed / allCars;
+        }
+
+        public CheckPointStatistics GetStatistics()
+        {
+            return statistics;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            CheckPoint checkPoint = new CheckPoint();
+            Console.WriteLine("Пункт контроля работает");
+            Console.WriteLine("Нажмите любую клавишу для выхода");
+
+            while (!Console.KeyAvailable)
+            {
+                AVehicle vehicle;
+                Random random = new Random();
+                int type = random.Next(0, 3);
+    
+                if (type == 0)
+                    vehicle = new Car();
+                else if (type == 1)
+                    vehicle = new Bus();
+                else
+                    vehicle = new Truck();
+    
+                vehicle.LicensePlateNumber = random.Next(1, 15);
+                vehicle.Color = (VehicleColor)random.Next(1, 5);
+                vehicle.HasPassenger = random.Next(1, 2) == 1;
+                checkPoint.RegisterVehicle(vehicle);
+    
+                int time = random.Next(500, 5001);
+                Thread.Sleep(time);
+            }
+
+            CheckPointStatistics statistic = checkPoint.GetStatistics();
+
+            Console.WriteLine("--------------------");
+            Console.WriteLine("Статистика:");
+            Console.WriteLine("Легковых: " + statistic.CarsCount);
+            Console.WriteLine("Автобусов: " + statistic.BusesCount);
+            Console.WriteLine("Грузовых: " + statistic.TrucksCount);
+            Console.WriteLine("Нарушителей: " + statistic.SpeedLimitBreakersCount);
+            Console.WriteLine("Угнанных: " + statistic.CarJackersCount);
+            Console.WriteLine("Средняя скорость: " + statistic.AverageSpeed);
+        }
+    }
+}
