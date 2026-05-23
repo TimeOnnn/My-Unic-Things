@@ -1,6 +1,6 @@
 namespace Study.Labs.Lab04
 {
-        enum VehicleColor
+    enum VehicleColor
     {
         Белый,
         Чёрный,
@@ -137,37 +137,47 @@ namespace Study.Labs.Lab04
             return statistics;
         }
     }
-
+    
     class Program
     {
         static void Main()
         {
             CheckPoint checkPoint = new CheckPoint();
+            
             Console.WriteLine("Пункт контроля работает");
             Console.WriteLine("Нажмите любую клавишу для выхода");
 
             while (!Console.KeyAvailable)
             {
-                AVehicle vehicle;
-                Random random = new Random();
-                int type = random.Next(0, 3);
-    
-                if (type == 0)
-                    vehicle = new Car();
-                else if (type == 1)
-                    vehicle = new Bus();
-                else
-                    vehicle = new Truck();
-    
-                vehicle.LicensePlateNumber = random.Next(1, 15);
-                vehicle.Color = (VehicleColor)random.Next(1, 5);
-                vehicle.HasPassenger = random.Next(1, 2) == 1;
-                checkPoint.RegisterVehicle(vehicle);
-    
-                int time = random.Next(500, 5001);
-                Thread.Sleep(time);
+                CreateVehicle(checkPoint);
             }
 
+            PrintStatistics(checkPoint);
+        }
+        public static void CreateVehicle(CheckPoint checkPoint)
+        {
+            AVehicle vehicle;
+            Random random = new Random();
+            int type = random.Next(0, 3);
+
+            if (type == 0)
+                vehicle = new Car();
+            else if (type == 1)
+                vehicle = new Bus();
+            else
+                vehicle = new Truck();
+
+            vehicle.LicensePlateNumber = random.Next(1, 15);
+            vehicle.Color = (VehicleColor)random.Next(1, 5);
+            vehicle.HasPassenger = random.Next(1, 2) == 1;
+            checkPoint.RegisterVehicle(vehicle);
+
+            int time = random.Next(500, 5001);
+            Thread.Sleep(time);
+        }
+
+        public static void PrintStatistics (CheckPoint checkPoint)
+        {
             CheckPointStatistics statistic = checkPoint.GetStatistics();
 
             Console.WriteLine("--------------------");
