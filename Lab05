@@ -1,0 +1,126 @@
+namespace Study.Labs.Lab05
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var coffeeMachine = new CoffeeMachine();
+            var espresso = new Espresso();
+            var filter = new Filter();
+            var cappucchino = new Cappuccino();
+            
+            RecipeSelection();
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            CoffeeMachine.BrewCoffee(choice);
+        }
+
+        public static void RecipeSelection()
+        {
+            Console.WriteLine("Выберите рецепт");
+            Console.WriteLine("1. Капучино\n2. Фильтер\n3. Эспрессо");
+        }
+    }
+
+
+    public class CoffeeMachine
+    {
+        public int CoffeeBeansCapasity = 1000;
+        public int WaterCapasity = 1000;
+        public int MilkCapasity = 1000;
+
+        public void GetResource(int GetCoffeeBeans, int GetWater, int GetMilk)
+        { 
+            CoffeeBeansCapasity -= GetCoffeeBeans;
+            WaterCapasity -= GetWater;
+            MilkCapasity -= GetMilk;
+        }
+
+        public static void BrewCoffee(int choice)
+        {
+            if (choice == 1)
+            {
+                
+            }
+        }
+    }
+
+    abstract class CoffeeRecipe
+    {
+        public abstract int GetCoffeeBeans();
+        public abstract int GetWater();
+        public abstract int GetMilk();
+    }
+
+    class Espresso : CoffeeRecipe
+    {
+        public override int GetCoffeeBeans()
+        {
+            int coffeeBeans = 200;
+            return coffeeBeans;
+        }
+        public override int GetWater()
+        {
+            int water = 300;
+            return water;
+        }
+        public override int GetMilk()
+        {
+            int milk = 0;
+            return milk;
+        }
+    }
+    class Filter : CoffeeRecipe
+    {
+        public override int GetCoffeeBeans()
+        {
+            int coffeeBeans = 150;
+            return coffeeBeans;
+        }
+        public override int GetWater()
+        {
+            int water = 230;
+            return water;
+        }
+        public override int GetMilk()
+        {
+            int milk = 70;
+            return milk;
+        }
+    }
+    class Cappuccino : CoffeeRecipe
+    {
+        public override int GetCoffeeBeans()
+        {
+            int coffeeBeans = 100;
+            return coffeeBeans;
+        }
+        public override int GetWater()
+        {
+            int water = 200;
+            return water;
+        }
+        public override int GetMilk()
+        {
+            int milk = 100;
+            return milk;
+        }
+    }
+
+
+
+    //abstract class Test
+    //{
+    //    public abstract void NoMoreThan();
+    //}
+
+    //class CoffeBeansLevelTest : Test 
+    //{
+    //    public override void NoMoreThan(int CoffeeBeansLevel)
+    //    {
+    //        bool result;
+    //        if (CoffeeBeansLevel <)
+    //    }
+    //}
+
+}
