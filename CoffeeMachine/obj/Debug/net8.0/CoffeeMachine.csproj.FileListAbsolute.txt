@@ -1,0 +1,11 @@
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\bin\Debug\net8.0\CoffeeMachine.deps.json
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\bin\Debug\net8.0\CoffeeMachine.dll
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\bin\Debug\net8.0\CoffeeMachine.pdb
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\CoffeeMachine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\CoffeeMachine.AssemblyInfoInputs.cache
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\CoffeeMachine.AssemblyInfo.cs
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\CoffeeMachine.csproj.CoreCompileInputs.cache
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\CoffeeMachine.dll
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\refint\CoffeeMachine.dll
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\CoffeeMachine.pdb
+C:\Users\timgu\OneDrive\Документы\Программы\Новая папка\CoffeeMachine\CoffeeMachine\obj\Debug\net8.0\ref\CoffeeMachine.dll
